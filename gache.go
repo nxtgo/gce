@@ -1,4 +1,4 @@
-package cache
+package gache
 
 import (
 	"sync"
