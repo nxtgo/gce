@@ -1,3 +1,3 @@
-module github.com/elisiei/gache
+module github.com/nxtgo/gache
 
-go 1.25.0
+go 1.13
