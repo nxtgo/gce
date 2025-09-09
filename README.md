@@ -1,24 +1,50 @@
-# gache
+# gce
 
-a tiny generic in-memory cache for go with optional expiration.  
-it runs a background cleaner to drop expired items.  
-that's it. nothing fancy.
+*formerly "gache"*
+
+generic, fast, sharded, lock-aware in-memory cache for Go.
+
+> [!IMPORTANT]
+> `gce` requires **go >=1.25** as it uses the new `sync.WaitGroup` api.
 
 ## features
 
-* 0 deps.
-* minimal code (104 lines of code).
-* extremely simple to use.
+- shared concurrency
+- optional **ttl**
+- optional **lru eviction**
+- atomic stats
+- background stale entry cleanup
+- simple
 
 ## usage
 
 ```go
-c := gache.New[string, string](time.Minute)
+package main
 
-c.Set("hello", "world", time.Second*30) // or 0 for no expiration.
+import (
+	"fmt"
+	"time"
 
-if v, ok := c.Get("hello"); ok {
-    fmt.Println(v) // "world"
+	"github.com/nxtgo/gce"
+)
+
+func main() {
+	// create cache with defaults
+	c := gce.New[string, string]()
+
+	// set values with TTL
+	c.Set("foo", "bar", time.Minute)
+
+	// get values
+	if v, ok := c.Get("foo"); ok {
+		fmt.Println("value:", v)
+	}
+
+	// stats
+	fmt.Printf("%+v\n", c.Stats())
+
+	// clean up
+	c.Close()
 }
 ```
 

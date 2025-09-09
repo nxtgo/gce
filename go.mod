@@ -1,3 +1,3 @@
-module github.com/nxtgo/gache
+module github.com/nxtgo/gce
 
-go 1.18
+go 1.25
