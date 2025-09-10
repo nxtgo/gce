@@ -1,6 +1,6 @@
 # gce
 
-*formerly "gache"*
+*formerly "gache"*.
 
 generic, fast, sharded, lock-aware in-memory cache for Go.
 
